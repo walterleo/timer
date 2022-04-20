@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alarm Clock</title>
+    <style>
+        body {
+            background-color: bisque;
+        }
+
+        .title {
+            font-size: 60px;
+            ;
+        }
+
+        input[type=time] {
+            width: 50%;
+            padding: 12px 20px;
+            margin: 10px 10px;
+            box-sizing: border-box;
+            border: none;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 60px;
+        }
+
+        input:focus {
+            outline: none;
+        }
+
+        button {
+            font-size: 25px;
+            width: 20%;
+            margin: 20px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <center>
+        <div class="title">
+            <h1> Alarm Clock</h1>
+            <h2 id="clock"></h2>
+        </div>
+        <div class="alarm">
+            <input type="time" id="alarmtime" />
+        </div>
+        <div class="watch">
+            <button onclick="scheduleAlarm();">Start</button>
+            <button onclick="reset();"> Reset</button>
+        </div>
+    </center>
+</body>
+<script>
+    setInterval(() => {
+        document.getElementById("clock").innerText = new Date().toLocaleTimeString();
+    }, 1000);
+
+
+    function scheduleAlarm() {
+        console.log("Geeting it to work..");
+        let a = setInterval(() => {
+            let alarmtime = document.getElementById("alarmtime").value;
+            let hours = alarmtime.split(":")[0];
+            let mins = alarmtime.split(":")[1];
+
+            let currentHour = new Date().getHours();
+            let currentMin = new Date().getMinutes();
+            if (currentHour == hours && currentMin == mins) {
+                console.log("Ring the bell");
+                clearInterval(a);
+                let audio = new Audio('timers_alarm.wav');
+                audio.play();
+            }
+        }, 1000);
+    }
+</script>
+
+</html>
